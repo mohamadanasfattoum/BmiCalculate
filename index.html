@@ -6,45 +6,69 @@
     <title>BMI Rechner</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #283048, #859398);
         }
         .container {
-            max-width: 400px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
+        h1 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
         input[type="number"] {
-            width: calc(100% - 22px);
-            padding: 10px;
+            width: calc(100% - 24px);
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+            outline: none;
         }
         button {
-            padding: 10px 15px;
-            color: #fff;
-            background-color: #007bff;
+            padding: 12px;
+            color: #ffffff;
+            background-color: #2980b9;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
             width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #1f6391;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(31, 99, 145, 0.3);
         }
         .result {
             margin-top: 20px;
             font-size: 1.2em;
+            color: #34495e;
         }
     </style>
 </head>
@@ -52,6 +76,7 @@
 
 <div class="container">
     <h1>BMI Rechner</h1>
+    <p>Geben Sie Ihr Gewicht in Kilogramm und Ihre Größe in Metern ein, um Ihren Body-Mass-Index (BMI) zu berechnen.</p>
     <input type="number" id="weight" placeholder="Gewicht (kg)" required>
     <input type="number" id="height" placeholder="Größe (m)" step="0.01" required>
     <button onclick="calculateBMI()">Berechnen</button>
