@@ -1,10 +1,21 @@
+# uvicorn BimCalc2:app --reload 
+# Verbessern Sie den Code, Code Optimization
+
 from fastapi import FastAPI, Query
+# pydantic # Bibliothek zur Eingabevalidierung # مكتبة للتحقق من المدخلات
+from pydantic import BaseModel 
+
 
 # create api app
 app = FastAPI()
 
 # تحديد المسار الرأيسي
 # Definieren den Hauptpfad
+
+class BMIOutput(BaseModel):
+    bmi: float
+    message: str
+    
 @app.get("/calculate_bmi")
 
 def calculate_bmi(
@@ -23,17 +34,4 @@ def calculate_bmi(
     else:
         message = 'Sie leiden an Fettleibigkeit, suchen Sie daher bitte einen Arzt auf'
 
-    return {
-        'bmi': bmi,
-        'message': message
-        }
-# ohne docs#
-# http://127.0.0.1:8000/calculate_bmi?weight=77&height=1.78
-# outpot:
-# {
-#   "bmi": 24.3024870597147,
-#   "message": "Sie haben ein normales Gewicht, behalten Sie es bei"
-# }
-
-# mit docs#
-# http://127.0.0.1:8000/docs#/
+    return BMIOutput(bmi=bmi, message=message)
