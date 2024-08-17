@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Rechner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>BMI Rechner</h1>
+    <input type="number" id="weight" placeholder="Gewicht (kg)" required>
+    <input type="number" id="height" placeholder="Größe (m)" step="0.01" required>
+    <button onclick="calculateBMI()">Berechnen</button>
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    async function calculateBMI() {
+        const weight = document.getElementById('weight').value;
+        const height = document.getElementById('height').value;
+
+        if (weight && height) {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/calculate_bmi?weight=${weight}&height=${height}`);
+                if (!response.ok) {
+                    throw new Error('Fehler beim Abrufen der Daten');
+                }
+                const data = await response.json();
+                document.getElementById('result').textContent = `Ihr BMI ist: ${data.bmi.toFixed(2)}. ${data.message}`;
+            } catch (error) {
+                document.getElementById('result').textContent = 'Fehler: ' + error.message;
+            }
+        } else {
+            document.getElementById('result').textContent = 'Bitte geben Sie sowohl Gewicht als auch Größe ein.';
+        }
+    }
+</script>
+
+</body>
+</html>
