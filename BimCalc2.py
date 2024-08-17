@@ -3,11 +3,22 @@
 
 from fastapi import FastAPI, Query
 # pydantic # Bibliothek zur Eingabevalidierung # مكتبة للتحقق من المدخلات
-from pydantic import BaseModel 
+from pydantic import BaseModel
+
+# CORSMiddleware: Erlauben Sie die Kommunikation mit dem Browser und Anfragen vom Browser zulassen 
+# السماح بطلبات من المتصفح, السماح بالتواصل مع المتصفح
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # create api app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # تحديد المسار الرأيسي
 # Definieren den Hauptpfad
@@ -15,7 +26,7 @@ app = FastAPI()
 class BMIOutput(BaseModel):
     bmi: float
     message: str
-    
+
 @app.get("/calculate_bmi")
 
 def calculate_bmi(
