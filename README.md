@@ -113,3 +113,6 @@ To use the FastAPI project:
    ```
 
    The response will contain the BMI, BMI category, and health risk information.
+
+   ### project screenshot
+![](https://github.com/mohamadanasfattoum/BmiCalculate/blob/main/screencapture.png)
